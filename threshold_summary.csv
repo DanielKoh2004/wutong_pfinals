@@ -1,0 +1,2 @@
+fraud_count,student_count,prepaid_fraud_pct,calls_per_day_median,calls_per_day_p95,avg_duration_median,id_linked_p75,student_targeting_pct
+12508,57713,97.60952990086345,33.0,88.0,82.8085,10.0,9.785737128237928
