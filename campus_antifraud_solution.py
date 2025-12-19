@@ -635,4 +635,173 @@ print("✅ Summary exported to threshold_summary.csv")
 students_featured[['user_id', 'msisdn', 'risk_score', 'high_risk']].to_csv('student_risk_scores.csv', index=False)
 print("✅ Student risk scores exported to student_risk_scores.csv")
 
+# %% [markdown]
+# ## 8. FLAGGED NUMBERS SUMMARY WITH REASONS
+
+# %%
+print("\n" + "="*80)
+print("📊 COMPREHENSIVE FLAGGED NUMBERS SUMMARY")
+print("="*80)
+
+# ============================================
+# SECTION A: FLAGGED STUDENTS SUMMARY
+# ============================================
+print("\n" + "─"*80)
+print("🎓 PART A: HIGH-RISK STUDENTS FLAGGED")
+print("─"*80)
+
+# Create detailed student flag reasons
+student_flags = pd.DataFrame()
+student_flags['user_id'] = students_featured['user_id']
+student_flags['msisdn'] = students_featured['msisdn']
+student_flags['risk_score'] = students_featured['risk_score']
+
+# Individual flag reasons for students
+flag_reasons_students = []
+
+# Reason 1: Sent SMS to fraud numbers
+if 'msg_call' in students_featured.columns:
+    students_featured['flag_sms_to_fraud'] = (students_featured['msg_call'] > 0).astype(int)
+    cnt = students_featured['flag_sms_to_fraud'].sum()
+    flag_reasons_students.append(('SMS Sent TO Fraud Numbers', cnt, cnt/len(students)*100))
+    print(f"   ⚠️ Sent SMS to fraud numbers: {cnt:,} students ({cnt/len(students)*100:.2f}%)")
+
+# Reason 2: Received SMS from fraud numbers  
+if 'msg_receive' in students_featured.columns:
+    students_featured['flag_sms_from_fraud'] = (students_featured['msg_receive'] > 0).astype(int)
+    cnt = students_featured['flag_sms_from_fraud'].sum()
+    flag_reasons_students.append(('SMS Received FROM Fraud', cnt, cnt/len(students)*100))
+    print(f"   📱 Received SMS from fraud: {cnt:,} students ({cnt/len(students)*100:.2f}%)")
+
+# Reason 3: Called by fraud number (fraud_msisdn linkage)
+if 'fraud_msisdn' in students_featured.columns:
+    students_featured['flag_called_by_fraud'] = students_featured['fraud_msisdn'].notna().astype(int)
+    cnt = students_featured['flag_called_by_fraud'].sum()
+    flag_reasons_students.append(('Called by Fraud Number', cnt, cnt/len(students)*100))
+    print(f"   📞 Called by fraud number: {cnt:,} students ({cnt/len(students)*100:.2f}%)")
+
+# Reason 4: International student (higher risk)
+if 'is_international' in students_featured.columns:
+    cnt = students_featured['is_international'].sum()
+    flag_reasons_students.append(('International Student', cnt, cnt/len(students)*100))
+    print(f"   🌏 International students: {cnt:,} ({cnt/len(students)*100:.2f}%)")
+
+# Reason 5: Young age (< 22)
+if 'age' in students_featured.columns:
+    students_featured['flag_young_age'] = (students_featured['age'] < 22).astype(int)
+    cnt = students_featured['flag_young_age'].sum()
+    flag_reasons_students.append(('Young Age (<22)', cnt, cnt/len(students)*100))
+    print(f"   👤 Young age (<22): {cnt:,} students ({cnt/len(students)*100:.2f}%)")
+
+# Reason 6: Calls from mainland
+if 'from_china_mobile_call_cnt' in students_featured.columns:
+    students_featured['flag_mainland_calls'] = (students_featured['from_china_mobile_call_cnt'] > 5).astype(int)
+    cnt = students_featured['flag_mainland_calls'].sum()
+    flag_reasons_students.append(('Frequent Mainland Calls', cnt, cnt/len(students)*100))
+    print(f"   🇨🇳 Frequent mainland calls (>5): {cnt:,} students ({cnt/len(students)*100:.2f}%)")
+
+# Total high-risk students
+high_risk_total = students_featured['high_risk'].sum()
+print(f"\n   ✅ TOTAL HIGH-RISK STUDENTS: {high_risk_total:,} ({high_risk_total/len(students)*100:.2f}%)")
+
+# ============================================
+# SECTION B: FLAGGED FRAUD NUMBERS SUMMARY
+# ============================================
+print("\n" + "─"*80)
+print("🚨 PART B: FRAUD NUMBERS FLAGGED BY RULE")
+print("─"*80)
+
+flag_reasons_fraud = []
+
+# Rule 1: Burst Dialer
+cnt = fraud_with_rules['rule1_burst_block'].sum()
+flag_reasons_fraud.append(('Rule 1: Burst Dialer (≥88 calls/day + prepaid + short)', cnt, cnt/len(fraud_confirmed)*100))
+print(f"   📞 Rule 1 - Burst Dialer: {cnt:,} ({cnt/len(fraud_confirmed)*100:.1f}%)")
+
+# Rule 2: SIM Farm
+cnt = fraud_with_rules['rule2_sim_farm'].sum()
+flag_reasons_fraud.append(('Rule 2: SIM Farm (≥10 ID-linked + prepaid)', cnt, cnt/len(fraud_confirmed)*100))
+print(f"   📱 Rule 2 - SIM Farm: {cnt:,} ({cnt/len(fraud_confirmed)*100:.1f}%)")
+
+# Rule 3: Student Targeting
+cnt = fraud_with_rules['rule3_student_targeting'].sum()
+flag_reasons_fraud.append(('Rule 3: Student Targeting (calls students + high vol)', cnt, cnt/len(fraud_confirmed)*100))
+print(f"   🎓 Rule 3 - Student Targeting: {cnt:,} ({cnt/len(fraud_confirmed)*100:.1f}%)")
+
+# Rule 4: Wangiri
+cnt = fraud_with_rules['rule4_wangiri'].sum()
+flag_reasons_fraud.append(('Rule 4: Wangiri (<2s calls + prepaid)', cnt, cnt/len(fraud_confirmed)*100))
+print(f"   ⏱️ Rule 4 - Wangiri (<2s): {cnt:,} ({cnt/len(fraud_confirmed)*100:.1f}%)")
+
+# Rule 5: Social Engineering
+cnt = fraud_with_rules['rule5_social_engineering'].sum()
+flag_reasons_fraud.append(('Rule 5: Social Engineering (>3min + targets students)', cnt, cnt/len(fraud_confirmed)*100))
+print(f"   🕐 Rule 5 - Social Engineering (>3min): {cnt:,} ({cnt/len(fraud_confirmed)*100:.1f}%)")
+
+# Total flagged by any rule
+any_rule_total = fraud_with_rules['any_rule_triggered'].sum()
+print(f"\n   ✅ TOTAL FLAGGED BY ANY RULE: {any_rule_total:,} ({any_rule_total/len(fraud_confirmed)*100:.1f}%)")
+
+# ============================================
+# SECTION C: EXPORT DETAILED FLAGGED LISTS
+# ============================================
+print("\n" + "─"*80)
+print("📁 PART C: EXPORTING DETAILED FLAGGED LISTS")
+print("─"*80)
+
+# Export flagged students with reasons
+student_export_cols = ['user_id', 'msisdn', 'risk_score', 'high_risk']
+if 'flag_sms_to_fraud' in students_featured.columns:
+    student_export_cols.append('flag_sms_to_fraud')
+if 'flag_sms_from_fraud' in students_featured.columns:
+    student_export_cols.append('flag_sms_from_fraud')
+if 'flag_called_by_fraud' in students_featured.columns:
+    student_export_cols.append('flag_called_by_fraud')
+if 'is_international' in students_featured.columns:
+    student_export_cols.append('is_international')
+if 'flag_young_age' in students_featured.columns:
+    student_export_cols.append('flag_young_age')
+
+students_flagged = students_featured[students_featured['high_risk'] == 1][student_export_cols]
+students_flagged.to_csv('students_flagged_with_reasons.csv', index=False)
+print(f"   ✅ Exported: students_flagged_with_reasons.csv ({len(students_flagged):,} records)")
+
+# Export flagged fraud numbers with reasons
+fraud_export_cols = ['user_id', 'msisdn', 'call_cnt_day', 'avg_actv_dur', 'iden_type_num', 'call_stu_cnt',
+                     'rule1_burst_block', 'rule2_sim_farm', 'rule3_student_targeting', 
+                     'rule4_wangiri', 'rule5_social_engineering', 'any_rule_triggered']
+fraud_export_cols = [c for c in fraud_export_cols if c in fraud_with_rules.columns]
+
+fraud_flagged = fraud_with_rules[fraud_with_rules['any_rule_triggered'] == 1][fraud_export_cols]
+fraud_flagged.to_csv('fraud_flagged_with_reasons.csv', index=False)
+print(f"   ✅ Exported: fraud_flagged_with_reasons.csv ({len(fraud_flagged):,} records)")
+
+# ============================================
+# SECTION D: SUMMARY TABLE
+# ============================================
+print("\n" + "="*80)
+print("📊 FINAL SUMMARY TABLE")
+print("="*80)
+
+summary_table = f"""
+┌────────────────────────────────────────────────────────────────────────────────┐
+│                           FLAGGED NUMBERS SUMMARY                               │
+├────────────────────────────────────────────────────────────────────────────────┤
+│  STUDENTS                                                                       │
+│    Total Analyzed:        {len(students):>10,}                                          │
+│    High-Risk Flagged:     {high_risk_total:>10,}  ({high_risk_total/len(students)*100:>5.2f}%)                           │
+├────────────────────────────────────────────────────────────────────────────────┤
+│  FRAUD NUMBERS                                                                  │
+│    Total Analyzed:        {len(fraud_confirmed):>10,}                                          │
+│    Flagged by Rules:      {any_rule_total:>10,}  ({any_rule_total/len(fraud_confirmed)*100:>5.1f}%)                            │
+├────────────────────────────────────────────────────────────────────────────────┤
+│  FILES EXPORTED                                                                 │
+│    • students_flagged_with_reasons.csv                                          │
+│    • fraud_flagged_with_reasons.csv                                             │
+│    • student_risk_scores.csv                                                    │
+│    • threshold_summary.csv                                                      │
+└────────────────────────────────────────────────────────────────────────────────┘
+"""
+print(summary_table)
+
 print("\n🎉 NOTEBOOK COMPLETE!")
