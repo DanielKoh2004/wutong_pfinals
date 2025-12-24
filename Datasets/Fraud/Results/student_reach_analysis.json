@@ -1,0 +1,33 @@
+{
+  "targeting_rate": {
+    "total_fraud": 8960,
+    "targeting_students": 146,
+    "targeting_pct": 1.6
+  },
+  "engagement_patterns": {
+    "Avg Calls/Day": {
+      "student_targeting": 36.69,
+      "non_student": 36.43,
+      "difference": 0.26
+    },
+    "Dispersion Rate": {
+      "student_targeting": 0.0,
+      "non_student": 0.0,
+      "difference": 0.0
+    },
+    "ID Sharing": {
+      "student_targeting": 0.0,
+      "non_student": 0.0,
+      "difference": 0.0
+    }
+  },
+  "time_patterns": {
+    "note": "Requires timestamp data for detailed time analysis",
+    "recommendation": "Track fraud call timing for peak hour detection"
+  },
+  "engagement": {
+    "students_contacted": 469,
+    "students_engaged": 38,
+    "engagement_rate": 8.1
+  }
+}

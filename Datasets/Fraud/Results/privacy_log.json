@@ -1,0 +1,40 @@
+{
+  "budget": {
+    "allocated": {
+      "federated_learning": 3.0,
+      "risk_scoring": 0.5,
+      "mpc_output": 0.1
+    },
+    "total_spent": 3.6,
+    "remaining": 6.4,
+    "total_budget": 10.0,
+    "utilization": "36.0%"
+  },
+  "log": [
+    {
+      "layer": "federated_learning",
+      "epsilon": 1.0,
+      "cumulative": 1.0
+    },
+    {
+      "layer": "federated_learning",
+      "epsilon": 1.0,
+      "cumulative": 2.0
+    },
+    {
+      "layer": "federated_learning",
+      "epsilon": 1.0,
+      "cumulative": 3.0
+    },
+    {
+      "layer": "risk_scoring",
+      "epsilon": 0.5,
+      "cumulative": 3.5
+    },
+    {
+      "layer": "mpc_output",
+      "epsilon": 0.1,
+      "cumulative": 3.6
+    }
+  ]
+}

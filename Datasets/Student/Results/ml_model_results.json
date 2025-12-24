@@ -1,0 +1,46 @@
+{
+  "cv_auc": 0.581,
+  "cv_std": 0.086,
+  "top_features": [
+    {
+      "feature": "is_mainland_student",
+      "importance": 0.11446995288133621
+    },
+    {
+      "feature": "local_exposure_total",
+      "importance": 0.09310653805732727
+    },
+    {
+      "feature": "uses_esim",
+      "importance": 0.08764905482530594
+    },
+    {
+      "feature": "uses_5g",
+      "importance": 0.06944219022989273
+    },
+    {
+      "feature": "is_new_to_hk",
+      "importance": 0.06525593250989914
+    },
+    {
+      "feature": "is_hk_local",
+      "importance": 0.06363116204738617
+    },
+    {
+      "feature": "uses_travel_permit",
+      "importance": 0.06362490355968475
+    },
+    {
+      "feature": "foreign_to_local_ratio",
+      "importance": 0.06171690672636032
+    },
+    {
+      "feature": "foreign_exposure_total",
+      "importance": 0.060157641768455505
+    },
+    {
+      "feature": "age",
+      "importance": 0.056445732712745667
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "total_records": 4217,
+  "total_fraud": 235,
+  "metrics": {
+    "recall": 0.6851063829787234,
+    "precision": 0.20200752823086573,
+    "f1": 0.312015503875969,
+    "auc_roc": 0.5983348751156337
+  },
+  "confusion_matrix": {
+    "true_positives": 161,
+    "false_positives": 636,
+    "false_negatives": 74,
+    "true_negatives": 2561
+  }
+}

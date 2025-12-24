@@ -1,0 +1,36 @@
+[
+  {
+    "name": "Robocaller (机器人拨打)",
+    "description": "Extremely high call volume per day",
+    "count": 2284,
+    "pct_of_fraud": 25.5,
+    "characteristics": {
+      "avg_calls_day": 71.3,
+      "max_calls_day": 129,
+      "prepaid_pct": 100.0
+    },
+    "detection_rule": "call_cnt_day >= 50"
+  },
+  {
+    "name": "Student Targeter (学生针对者)",
+    "description": "Specifically targets student phone numbers",
+    "count": 146,
+    "pct_of_fraud": 1.6,
+    "characteristics": {
+      "prepaid_pct": 100.0,
+      "avg_calls_day": 36.7
+    },
+    "detection_rule": "hit_student_model == \"Y\""
+  },
+  {
+    "name": "Prepaid Fraud Operator (预付费欺诈)",
+    "description": "Uses prepaid SIM cards to avoid tracing",
+    "count": 8960,
+    "pct_of_fraud": 100.0,
+    "characteristics": {
+      "sim_farm_pct": 0.0,
+      "avg_calls_day": 36.4
+    },
+    "detection_rule": "post_or_ppd == \"预付\""
+  }
+]
