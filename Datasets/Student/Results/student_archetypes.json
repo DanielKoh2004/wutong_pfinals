@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Mainland Freshman (内地新生)",
+    "description": "Young mainland students recently arrived in HK, unfamiliar with local systems",
+    "count": 48,
+    "pct_of_defrauded": 10.2,
+    "characteristics": {
+      "age_range": "18-22",
+      "avg_foreign_exposure": 27.6,
+      "mainland_app_user_pct": 56.2,
+      "engagement_rate": 2.1
+    },
+    "risk_factors": [
+      "New to HK",
+      "Mainland ID",
+      "Heavy mainland app usage",
+      "Language barrier"
+    ]
+  },
+  {
+    "name": "Graduate Researcher (研究生)",
+    "description": "Graduate/PhD students with high international communication",
+    "count": 92,
+    "pct_of_defrauded": 19.6,
+    "characteristics": {
+      "age_range": "23-30",
+      "avg_foreign_exposure": 17.1,
+      "mainland_carrier_calls": 1.5
+    },
+    "risk_factors": [
+      "High foreign call volume",
+      "Academic connections",
+      "International travel"
+    ]
+  },
+  {
+    "name": "Frequent Commuter (常返内地)",
+    "description": "Students who frequently travel between HK and Mainland",
+    "count": 55,
+    "pct_of_defrauded": 11.7,
+    "characteristics": {
+      "avg_mainland_days": 19.7,
+      "avg_hk_trips": 15.0
+    },
+    "risk_factors": [
+      "Cross-border sim usage",
+      "Vulnerable during travel",
+      "Multiple contact points"
+    ]
+  },
+  {
+    "name": "Engaged Victim (已回应受害者)",
+    "description": "Students who actively responded to fraud attempts",
+    "count": 19,
+    "pct_of_defrauded": 4.1,
+    "characteristics": {
+      "called_back": 19,
+      "replied_sms": 1,
+      "avg_age": 27.3,
+      "mainland_pct": 5.3
+    },
+    "risk_factors": [
+      "Already engaged",
+      "Highest risk",
+      "May have shared information"
+    ]
+  }
+]

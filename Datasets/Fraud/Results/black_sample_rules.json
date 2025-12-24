@@ -1,0 +1,93 @@
+{
+  "version": "2.0",
+  "generated_at": "2025-12-24T21:55:38.029819",
+  "total_rules": 10,
+  "rules": [
+    {
+      "rule_id": "RULE_01",
+      "name": "High Volume Caller",
+      "description": "High daily call count with dispersion",
+      "weight": 35,
+      "source": "Task 2: Fraud Portrait + SHAP",
+      "confidence": 0.85
+    },
+    {
+      "rule_id": "RULE_02",
+      "name": "SIM Farm (IMEI Switching)",
+      "description": "Multiple IMEI changes (>= 2 times)",
+      "weight": 25,
+      "source": "Task 2: Fraud Portrait",
+      "confidence": 0.85
+    },
+    {
+      "rule_id": "RULE_03",
+      "name": "New Account Rapid Activity",
+      "description": "New account with immediate high activity",
+      "weight": 30,
+      "source": "Task 2: Fraud Archetypes + SHAP",
+      "confidence": 0.8
+    },
+    {
+      "rule_id": "RULE_04",
+      "name": "Device Fingerprint",
+      "description": "High calls on old GSM modems (not 5G)",
+      "weight": 20,
+      "source": "Task 4: SIM Box Detection",
+      "confidence": 0.75
+    },
+    {
+      "rule_id": "RULE_05",
+      "name": "Student Targeting",
+      "description": "Deliberate targeting of student numbers",
+      "weight": 20,
+      "source": "Task 2: Student Reach",
+      "confidence": 0.75
+    },
+    {
+      "rule_id": "RULE_06",
+      "name": "Burst Mode Calling",
+      "description": "High volume (>50 calls) with short duration (<10s avg)",
+      "weight": 30,
+      "source": "Task 4: Robocall Pattern",
+      "confidence": 0.85
+    },
+    {
+      "rule_id": "RULE_07",
+      "name": "Anonymous Prepaid Burst",
+      "description": "Prepaid + unknown channel + high volume",
+      "weight": 15,
+      "source": "Task 2: Fraud Portrait + SHAP",
+      "confidence": 0.8
+    },
+    {
+      "rule_id": "RULE_08",
+      "name": "Multi Device",
+      "description": "Multiple device/IMEI changes",
+      "weight": 15,
+      "source": "Task 4: Pattern Analysis",
+      "confidence": 0.6
+    },
+    {
+      "rule_id": "RULE_09",
+      "name": "Smishing Pattern",
+      "description": "High SMS volume or roaming SMS",
+      "weight": 15,
+      "source": "Task 4: Pattern Analysis",
+      "confidence": 0.65
+    },
+    {
+      "rule_id": "RULE_10",
+      "name": "Robocall Detection",
+      "description": "Extremely high call volume (>=50/day)",
+      "weight": 30,
+      "source": "Task 2: Robocaller Archetype",
+      "confidence": 0.85
+    }
+  ],
+  "collection_stats": {
+    "audit_feedback": 8960,
+    "student_complaints": 222,
+    "cross_carrier": 149,
+    "model_predictions": 570
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "date_column": "stat_dt",
+  "shuffle_split_f1": 0.6578947368421053,
+  "time_split_f1": 0.3287671232876712,
+  "performance_drop": 0.3291276135544341,
+  "verdict": "TEMPORAL_FAILURE"
+}

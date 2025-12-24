@@ -1,0 +1,53 @@
+{
+  "total_features": 34,
+  "high_risk_count": 0,
+  "medium_risk_count": 0,
+  "high_risk_features": [],
+  "top_10_correlations": [
+    {
+      "feature": "vas_ofr_id_num",
+      "correlation": 0.17512352270974885
+    },
+    {
+      "feature": "iden_type_num",
+      "correlation": 0.1655118567455207
+    },
+    {
+      "feature": "id_type_hk_num",
+      "correlation": 0.15893703861166325
+    },
+    {
+      "feature": "change_imei_times",
+      "correlation": 0.13331183199224633
+    },
+    {
+      "feature": "refill_vchr_strt_time",
+      "correlation": 0.1284454228849139
+    },
+    {
+      "feature": "open_dt",
+      "correlation": 0.11891901628979282
+    },
+    {
+      "feature": "face_val",
+      "correlation": 0.11214863958300382
+    },
+    {
+      "feature": "called_cnt_day",
+      "correlation": 0.10797089169117016
+    },
+    {
+      "feature": "rechrg_for_ppd",
+      "correlation": 0.10005317626287218
+    },
+    {
+      "feature": "proc_time",
+      "correlation": 0.09124883136672998
+    }
+  ],
+  "potential_leakage_columns": [
+    "proc_time",
+    "audit_remark",
+    "audit_status"
+  ]
+}

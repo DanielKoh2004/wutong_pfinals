@@ -48,21 +48,6 @@ models/*.joblib
 models/*.h5
 models/*.pt
 
-# Data files (too large for git)
-Datasets/
-*.csv
-*.xlsx
-*.json
-!requirements.txt
-
-# Results and outputs
-Results/
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.webp
-
 # Logs
 *.log
 logs/

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "RULE_04",
+    "name": "New to Hong Kong",
+    "condition": "is_new_to_hk == 1",
+    "weight": 15,
+    "rationale": "New arrivals less familiar with HK systems and scam tactics"
+  },
+  {
+    "id": "RULE_05",
+    "name": "Heavy Mainland App User",
+    "condition": "mainland_app_days >= 14",
+    "weight": 10,
+    "rationale": "Heavy WeChat/Alipay usage indicates mainland-centric lifestyle"
+  },
+  {
+    "id": "RULE_06",
+    "name": "Repeat Unknown Caller",
+    "condition": "max_repeat_caller >= 3",
+    "weight": 15,
+    "rationale": "Multiple calls from same unknown number indicates targeting"
+  },
+  {
+    "id": "RULE_07",
+    "name": "Young Student Age",
+    "condition": "age <= 22",
+    "weight": 10,
+    "rationale": "Younger students (undergrad) show higher vulnerability"
+  },
+  {
+    "id": "RULE_08",
+    "name": "Uses Travel Permit",
+    "condition": "iden_type contains \"通行证\"",
+    "weight": 5,
+    "rationale": "Non-permanent resident using travel document"
+  }
+]

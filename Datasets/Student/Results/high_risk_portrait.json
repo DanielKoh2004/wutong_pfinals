@@ -1,0 +1,50 @@
+{
+  "age": {
+    "defrauded_mean": 25.7,
+    "non_defrauded_mean": 24.3,
+    "difference": 1.4
+  },
+  "mainland_student": {
+    "defrauded_pct": 23.0,
+    "non_defrauded_pct": 45.3,
+    "risk_multiplier": 0.51
+  },
+  "new_to_hk": {
+    "defrauded_pct": 39.2,
+    "non_defrauded_pct": 55.3
+  },
+  "foreign_exposure": {
+    "defrauded_mean": 13.4,
+    "non_defrauded_mean": 11.6,
+    "risk_multiplier": 1.15
+  },
+  "foreign_dominance": {
+    "defrauded_pct": 54.6,
+    "non_defrauded_pct": 71.8
+  },
+  "mainland_carrier_calls": {
+    "defrauded_mean": 0.9,
+    "non_defrauded_mean": 0.7
+  },
+  "repeat_unknown_caller": {
+    "defrauded_pct": 6.4,
+    "non_defrauded_pct": 3.8
+  },
+  "heavy_app_user": {
+    "defrauded_pct": 41.8,
+    "non_defrauded_pct": 38.2
+  },
+  "uses_esim": {
+    "defrauded_pct": 3.2,
+    "non_defrauded_pct": 2.6
+  },
+  "uses_5g": {
+    "defrauded_pct": 97.0,
+    "non_defrauded_pct": 97.0
+  },
+  "engagement_distribution": {
+    "RECEIVED_ONLY": 450,
+    "CALLED_BACK": 18,
+    "CALLED_AND_REPLIED": 1
+  }
+}

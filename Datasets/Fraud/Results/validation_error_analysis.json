@@ -1,0 +1,10 @@
+{
+  "true_fraud_count": 235,
+  "false_positive_count": 1382,
+  "true_negative_count": 2600,
+  "avg_call_volume": {
+    "true_fraud": 18.76595744680851,
+    "false_positives": 43.99565846599132,
+    "true_negatives": 7.448846153846154
+  }
+}

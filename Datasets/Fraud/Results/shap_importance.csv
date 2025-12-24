@@ -1,0 +1,11 @@
+feature,shap_importance
+avg_call_duration,2.6235845
+total_id_docs,1.6509385
+age,1.2828676
+called_cnt_day,0.5164481
+outbound_inbound_ratio,0.37535527
+call_cnt_day,0.355579
+first_recharge,0.19019815
+is_mysim,0.14575054
+is_5g,0.1074167
+is_prepaid,0.10007384

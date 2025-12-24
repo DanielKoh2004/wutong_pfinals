@@ -1,0 +1,38 @@
+{
+  "prepaid": {
+    "fraud_pct": 100.0,
+    "passed_pct": 99.3,
+    "risk_multiplier": 1.01
+  },
+  "call_cnt_day": {
+    "fraud_mean": 36.4,
+    "passed_mean": 44.0,
+    "risk_multiplier": 0.83
+  },
+  "id_sharing": {
+    "fraud_mean": 0.0,
+    "passed_mean": 0.01,
+    "risk_multiplier": 0.0
+  },
+  "sim_farm": {
+    "fraud_pct": 0.0,
+    "passed_pct": 0.0
+  },
+  "dispersion": {
+    "fraud_mean": 0.0,
+    "passed_mean": 0.031
+  },
+  "student_targeting": {
+    "fraud_pct": 1.6,
+    "passed_pct": 2.7,
+    "risk_multiplier": 0.6
+  },
+  "roaming": {
+    "fraud_pct": 0.0,
+    "passed_pct": 0.0
+  },
+  "new_account": {
+    "fraud_pct": 0,
+    "passed_pct": 0
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "technical_rules": [
+    {
+      "id": "RULE_02",
+      "name": "SIM Farm Detection",
+      "condition": "id_type_hk_num >= 3",
+      "risk_weight": 30,
+      "rationale": "Multiple SIMs under same ID indicates organized fraud"
+    },
+    {
+      "id": "RULE_03",
+      "name": "New Account High Activity",
+      "condition": "acct_age == \"新入网\" AND call_cnt_day > 20",
+      "risk_weight": 20,
+      "rationale": "New accounts with high call volume are suspicious"
+    },
+    {
+      "id": "RULE_05",
+      "name": "Robocall Detection",
+      "condition": "call_cnt_day >= 50",
+      "risk_weight": 25,
+      "rationale": "Extremely high call volume indicates automated dialing"
+    }
+  ],
+  "operational_guidance": [
+    {
+      "priority": "HIGH",
+      "action": "Monitor prepaid card registrations with >3 IDs per holder",
+      "frequency": "Real-time",
+      "rationale": "SIM farms are primary fraud infrastructure"
+    },
+    {
+      "priority": "HIGH",
+      "action": "Flag new accounts with >20 calls/day within first week",
+      "frequency": "Daily",
+      "rationale": "New fraudulent accounts show high activity early"
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "Cross-reference with student number database for targeting detection",
+      "frequency": "Weekly",
+      "rationale": "1.6% of fraud targets students"
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "Review passed audit cases with high-risk patterns",
+      "frequency": "Weekly",
+      "rationale": "Audit gaps exist where fraud patterns match but audit passed"
+    }
+  ],
+  "warning_criteria": [
+    {
+      "tier": "CRITICAL",
+      "condition": "Student engaged with fraudster (called back/replied)",
+      "action": "Immediate personal outreach + security office notification",
+      "count": 38
+    },
+    {
+      "tier": "HIGH",
+      "condition": "Student received calls from confirmed fraud numbers",
+      "action": "Push warning notification + fraud awareness resources",
+      "count": 469
+    },
+    {
+      "tier": "ELEVATED",
+      "condition": "Mainland student with high foreign call exposure",
+      "action": "Targeted awareness campaign",
+      "count": "TBD"
+    }
+  ]
+}
