@@ -20,3 +20,8 @@ joblib>=1.3.0
 
 # LLM Integration
 google-generativeai>=0.3.0
+groq>=0.4.0
+
+# Demo App
+gradio>=4.0.0
+python-dotenv>=1.0.0

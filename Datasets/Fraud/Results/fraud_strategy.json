@@ -53,13 +53,13 @@
       "tier": "CRITICAL",
       "condition": "Student engaged with fraudster (called back/replied)",
       "action": "Immediate personal outreach + security office notification",
-      "count": 38
+      "count": 41
     },
     {
       "tier": "HIGH",
       "condition": "Student received calls from confirmed fraud numbers",
       "action": "Push warning notification + fraud awareness resources",
-      "count": 469
+      "count": 479
     },
     {
       "tier": "ELEVATED",

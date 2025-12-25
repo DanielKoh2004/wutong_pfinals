@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "generated_at": "2025-12-24T21:55:38.029819",
+  "generated_at": "2025-12-25T12:01:08.376882",
   "total_rules": 10,
   "rules": [
     {
@@ -87,7 +87,7 @@
   "collection_stats": {
     "audit_feedback": 8960,
     "student_complaints": 222,
-    "cross_carrier": 149,
+    "cross_carrier": 150,
     "model_predictions": 570
   }
 }
