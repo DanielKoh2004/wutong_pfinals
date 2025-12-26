@@ -570,14 +570,17 @@ def get_feature_columns(features_df: pd.DataFrame) -> list:
         'label_strict', 'label_expanded', 
         'is_confirmed_fraud', 'is_confirmed_clean', 'is_pending',
         'is_suspicious_passed', 'is_fraud',
-        # LEAKAGE COLUMNS (identified by column audit)
-        'proc_time',        # Suspension time - only known AFTER fraud detected
+        # RAW LEAKAGE COLUMNS (identified by column audit)
+        'proc_time',         # Suspension time - only known AFTER fraud detected
         'hit_student_model', # Suspension + hit student model - only known AFTER suspension!
-        'audit_remark',     # Audit notes - only known AFTER audit
-        'audit_status',     # Audit result - the target variable!
-        'audit_result',     # Alternative audit column
-        'from_corp_complaint',  # Corporate complaint - filed AFTER fraud confirmed!
-        'msisdn_source',    # Complaint source (投诉来源) - only known AFTER complaint filed!
+        'audit_remark',      # Audit notes - only known AFTER audit
+        'audit_status',      # Audit result - the target variable!
+        'audit_result',      # Alternative audit column
+        'msisdn_source',     # Complaint source (投诉来源) - only known AFTER complaint filed!
+        # DERIVED LEAKAGE FEATURES (engineered from leakage columns above!)
+        'hit_student',       # Derived from hit_student_model - LEAKAGE!
+        'from_corp_complaint',  # Derived from msisdn_source - LEAKAGE!
+        'from_local_complaint', # Derived from msisdn_source - LEAKAGE!
     ]
     return [
         col for col in features_df.columns 
