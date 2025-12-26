@@ -502,7 +502,7 @@ if __name__ == "__main__":
     import sys
     sys.path.insert(0, 'src')
     from feature_engineering import engineer_fraud_features, create_fraud_labels, get_feature_columns
-    from black_sample_engine import apply_rules_to_dataset
+    # Black sample engine removed - features audited for leakage
     
     print("Loading fraud data...")
     df = pd.read_csv('Datasets/Fraud/Training and Testing Data/fraud_model_2.csv')
@@ -534,14 +534,11 @@ if __name__ == "__main__":
     ensemble = FraudDetectionEnsemble()
     ensemble.fit(X_train, y_train, feature_cols)
     
-    # Apply rules to test set
-    print("\nApplying rules...")
-    X_test_with_rules = apply_rules_to_dataset(X_test)
-    
-    # Predict
+    # Pure ML prediction (no rules)
     print("\nPredicting...")
-    y_pred = ensemble.predict(X_test, X_test_with_rules['is_flagged'])
-    y_proba = ensemble.predict_proba_ensemble(X_test, X_test_with_rules['is_flagged'])
+    rule_flags = pd.Series([False] * len(X_test), index=X_test.index)
+    y_pred = ensemble.predict(X_test, rule_flags)
+    y_proba = ensemble.predict_proba_ensemble(X_test, rule_flags)
     
     # Evaluate
     print("\n=== EVALUATION RESULTS ===")

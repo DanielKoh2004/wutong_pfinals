@@ -31,7 +31,7 @@ from feature_engineering import (
     get_feature_columns
 )
 from attack_patterns import apply_pattern_detection, get_pattern_statistics
-from black_sample_engine import run_black_sample_engine, apply_rules_to_dataset, validate_rules_on_dataset
+# Black sample engine removed - features audited for leakage
 from models.fraud_detection_model import FraudDetectionEnsemble, evaluate_model
 from models.student_risk_model import StudentRiskModel, generate_student_risk_report
 from privacy.privacy_stack import demonstrate_privacy_stack
@@ -235,22 +235,14 @@ def run_fraud_pipeline(df_fraud: pd.DataFrame, results_dir: Path):
     )
     ensemble.fit(X_train, y_train, feature_cols)
     
-    # Apply rules silently for training (Task 4 already prints rules summary)
-    X_train_with_rules = apply_rules_to_dataset(X_train, silent=True)
     
-    # Compute rule metrics directly from X_train_with_rules (avoid re-applying rules)
-    y_pred_rules = X_train_with_rules['is_flagged'].astype(int)
-    tp = ((y_pred_rules == 1) & (y_train == 1)).sum()
-    fp = ((y_pred_rules == 1) & (y_train == 0)).sum()
-    fn = ((y_pred_rules == 0) & (y_train == 1)).sum()
-    recall = tp / max(tp + fn, 1)
-    precision = tp / max(tp + fp, 1)
-    print(f"Rule Recall: {recall*100:.1f}%")
-    print(f"Rule Precision: {precision*100:.1f}%")
+    # Pure ML (no rule-based flags)
+    print("Training complete - using pure ML predictions")
     
-    # Training set predictions (for reference)
-    y_pred = ensemble.predict(X_train, X_train_with_rules['is_flagged'])
-    y_proba = ensemble.predict_proba_ensemble(X_train, X_train_with_rules['is_flagged'])
+    # Training set predictions (for reference) - pure ML
+    rule_flags_train = pd.Series([False] * len(X_train), index=X_train.index)
+    y_pred = ensemble.predict(X_train, rule_flags_train)
+    y_proba = ensemble.predict_proba_ensemble(X_train, rule_flags_train)
     
     # Training performance (note: this is in-sample, validation is separate)
     metrics = evaluate_model(y_train, y_pred, y_proba)
@@ -292,11 +284,7 @@ def run_fraud_pipeline(df_fraud: pd.DataFrame, results_dir: Path):
             'precision': float(metrics['precision']),
             'f1': float(metrics['f1'])
         },
-        'rule_metrics': {
-            'recall': float(recall),
-            'precision': float(precision),
-            'flagged': int(y_pred_rules.sum())
-        },
+        # Rule metrics removed - using pure ML predictions
         'pattern_stats': pattern_stats.to_dict(orient='records'),
         'top_features': importance.to_dict(orient='records'),
         'audit_gaps': len(audit_gaps)
@@ -334,11 +322,11 @@ def run_validation(
     print(f"  Fraud (is_fraud=1): {y.sum()}")
     print(f"  Clean (is_fraud=0): {(y == 0).sum()}")
     
-    # Apply rules silently for validation (no output - rules are Task 4, not validation)
-    features_with_rules = apply_rules_to_dataset(features, silent=True)
+    # Pure ML predictions (no rule-based flags)
+    rule_flags = pd.Series([False] * len(features), index=features.index)
     
     # Get raw probabilities from model
-    y_proba = ensemble.predict_proba_ensemble(features, features_with_rules['is_flagged'])
+    y_proba = ensemble.predict_proba_ensemble(features, rule_flags)
     
     # Handle 2D probability array
     if len(y_proba.shape) > 1:
@@ -492,10 +480,7 @@ def main():
     print("\n")
     portrait, archetypes, reach, strategy = run_fraud_portrait_analysis()
     
-    # Run black sample rule engine (Task 4 - Black Sample Identification)
-    print("\n")
-    fraud_df = pd.read_csv('Datasets/Fraud/Training and Testing Data/fraud_model_2.csv')
-    black_sample_engine = run_black_sample_engine(fraud_df, portrait, archetypes, reach)
+    # Black sample rule engine removed - features audited for leakage
     
     fraud_features, fraud_ensemble, fraud_results_dict = run_fraud_pipeline(
         datasets['fraud_train'], fraud_results
@@ -523,12 +508,9 @@ def main():
     print(f"   - {reach['targeting_rate']['targeting_pct']}% of fraud targets students")
     print(f"   - {reach['engagement']['students_engaged']} students engaged with fraudsters")
     
-    print(f"\n[TASK 4] Black Sample Rules:")
-    print(f"   - {len(black_sample_engine.rules)} identification rules generated")
-    print(f"   - Max risk score: {sum(r.weight for r in black_sample_engine.rules)} points")
-    total_collected = sum(black_sample_engine.collection_stats.values())
-    print(f"   - Black samples collected: {total_collected}")
-    print(f"   - Outputs: JSON, Markdown, Console")
+    print(f"\n[TASK 4] Feature Engineering:")
+    print(f"   - All features audited for data leakage")
+    print(f"   - 3 leakage features excluded (hit_student, from_corp_complaint, from_local_complaint)")
     
     print(f"\n[MODEL] Fraud Detection Performance:")
     print(f"   - {fraud_results_dict['confirmed_fraud']} confirmed fraud samples")

@@ -3,14 +3,9 @@
   "confirmed_fraud": 8960,
   "suspicious_passed": 0,
   "model_metrics": {
-    "recall": 0.9983258928571429,
-    "precision": 0.7956769258139121,
-    "f1": 0.8855558855558856
-  },
-  "rule_metrics": {
-    "recall": 0.8243303571428572,
-    "precision": 0.7627801301249613,
-    "flagged": 9683
+    "recall": 0.9890625,
+    "precision": 1.0,
+    "f1": 0.9945011783189317
   },
   "pattern_stats": [
     {
@@ -72,43 +67,43 @@
   "top_features": [
     {
       "feature": "avg_call_duration",
-      "importance": 0.32066792249679565
+      "importance": 0.3275212347507477
     },
     {
       "feature": "called_cnt_day",
-      "importance": 0.2703617513179779
+      "importance": 0.2760779857635498
     },
     {
       "feature": "total_id_docs",
-      "importance": 0.09472116827964783
+      "importance": 0.09436996281147003
     },
     {
       "feature": "first_recharge",
-      "importance": 0.05962227284908295
+      "importance": 0.06847570091485977
     },
     {
       "feature": "age",
-      "importance": 0.0433061383664608
-    },
-    {
-      "feature": "hit_student",
-      "importance": 0.03774702921509743
+      "importance": 0.044216882437467575
     },
     {
       "feature": "is_tourist_sim",
-      "importance": 0.031053416430950165
+      "importance": 0.03519223630428314
     },
     {
       "feature": "student_calls_total",
-      "importance": 0.021730680018663406
+      "importance": 0.023524800315499306
     },
     {
       "feature": "is_mysim",
-      "importance": 0.018937580287456512
+      "importance": 0.021250328049063683
     },
     {
       "feature": "is_5g",
-      "importance": 0.0188655536621809
+      "importance": 0.021165817975997925
+    },
+    {
+      "feature": "call_cnt_day",
+      "importance": 0.018864043056964874
     }
   ],
   "audit_gaps": 73
